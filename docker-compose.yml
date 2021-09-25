@@ -1,0 +1,11 @@
+version: '2.3'
+services:
+  backend:
+    extends:
+      file: backend/docker-compose.yml
+      service: backend
+
+  webapp:
+    extends:
+      file: webapp/docker-compose.yml
+      service: webapp

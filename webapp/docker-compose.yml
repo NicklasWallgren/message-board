@@ -1,0 +1,13 @@
+version: '2.3'
+services:
+  webapp:
+    image: messageboard-webapp
+    build:
+      context: .
+      dockerfile: docker/images/node
+      args:
+        - API_BASE_URL=${API_BASE_URL-http://localhost:8080/api}
+    ports:
+      - 3000:3000
+    working_dir: /webapp
+    command: sh -c 'yarn install && yarn start'

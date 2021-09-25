@@ -1,0 +1,66 @@
+dependencies {
+    spotbugsPlugins 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.11.0'
+
+    compileOnly 'com.github.spotbugs:spotbugs-annotations:4.4.1'
+    testCompileOnly 'com.github.spotbugs:spotbugs-annotations:4.4.1'
+
+    errorprone 'com.google.errorprone:error_prone_core:2.9.+'
+}
+
+/****************************
+ * SpotBugs configuration
+ ****************************/
+spotbugs {
+    toolVersion = '4.3.0'
+}
+
+spotbugsMain {
+    reports {
+        html {
+            enabled = true
+            destination = file("$buildDir/reports/spotbugs/main/spotbugs.html")
+            stylesheet = 'fancy-hist.xsl'
+        }
+    }
+}
+
+/****************************
+ * Checkstyle configuration
+ ****************************/
+checkstyle {
+    toolVersion '8.39'
+    configFile file("config/checkstyle/checkstyle.xml")
+    sourceSets = [sourceSets.main]
+    ignoreFailures = false
+    maxWarnings = 0
+}
+
+checkstyleMain {
+    source = 'src/main/java'
+}
+checkstyleTest {
+    source = 'src/test/java'
+}
+
+/****************************
+ * Error prone configuration
+ ****************************/
+tasks.withType(JavaCompile) {
+    options.compilerArgs << "-Werror"
+    options.errorprone.enabled = true
+    options.errorprone {
+        disableWarningsInGeneratedCode = true
+        ignoreUnknownCheckNames = false
+        allErrorsAsWarnings = false
+        // workaround for: https://github.com/google/error-prone/issues/780
+        errorproneArgs = [
+                '-Xep:UnusedVariable:OFF', // https://github.com/google/error-prone/issues/1266
+                '-Xep:UnusedMethod:OFF', // https://github.com/google/error-prone/issues/1266
+                '-Xep:MissingOverride:OFF',
+                '-Xep:JavaTimeDefaultTimeZone:OFF',
+                '-Xep:SameNameButDifferent:OFF',
+                '-Xep:MissingSummary:OFF', // Until https://github.com/projectlombok/lombok/issues/2730
+                '-Xlint:deprecation',
+        ]
+    }
+}

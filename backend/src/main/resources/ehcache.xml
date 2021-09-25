@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ehcache>
+<ehcache>
+    <diskStore path="java.io.tmpdir"/>
+
+    <sizeOfPolicy maxDepth="100" maxDepthExceededBehavior="abort" />
+
+    <defaultCache
+            name="defaultCache"
+            maxElementsInMemory="100"
+            eternal="false"
+            statistics="true"
+            timeToIdleSeconds="3600"
+            timeToLiveSeconds="3600"
+            overflowToDisk="false"
+            diskPersistent="false"
+            memoryStoreEvictionPolicy="LRU"/>
+</ehcache>
