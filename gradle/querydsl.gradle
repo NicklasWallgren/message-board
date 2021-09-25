@@ -1,0 +1,40 @@
+def querydslVersion = '5.0.+'
+
+dependencies {
+    implementation "com.querydsl:querydsl-core:${querydslVersion}"
+    implementation "com.querydsl:querydsl-jpa:${querydslVersion}"
+    implementation "com.querydsl:querydsl-apt:${querydslVersion}"
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = [
+                    'src/main/java',
+                    'src/querydsl/generated/',
+            ]
+        }
+    }
+}
+
+idea {
+    module {
+        sourceDirs += file('src/main/java')
+    }
+}
+
+configurations {
+    querydsl.extendsFrom compileClasspath
+}
+
+tasks.register("compileQuerydsl", JavaCompile) {
+    compiler ->
+        compiler.options.setFork(true)
+        compiler.options.setIncremental(true)
+        compiler.options.compilerArgs += ["-proc:only", "-processor", "com.querydsl.apt.jpa.JPAAnnotationProcessor"]
+        compiler.options.annotationProcessorPath = configurations.querydsl
+
+        compiler.setDestinationDir(file("src/querydsl/generated"))
+        compiler.setClasspath(configurations.querydsl)
+        compiler.setSource(file("src/main"))
+}

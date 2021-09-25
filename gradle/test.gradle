@@ -1,0 +1,18 @@
+/****************************
+ * JUnit configuration
+ ****************************/
+test {
+    useJUnitPlatform()
+}
+
+/****************************
+ * Jacoco configuration
+ ****************************/
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        html.enabled true
+    }
+}
+
+check.dependsOn jacocoTestReport
