@@ -43,7 +43,7 @@ public class MessageApiConverter implements
     }
 
     @Override
-    public Message updatedDomain(@NonNull final Long id, final MessageUpdateRequest request) {
+    public Message updatedDomain(@NonNull final Long id, @NonNull final MessageUpdateRequest request) {
         final Message existing = messageService.findOneForUpdate(id)
             .orElseThrow(() -> NotFoundException.of("message", "id", id));
 

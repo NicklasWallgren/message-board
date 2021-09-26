@@ -14,6 +14,7 @@ import dev.nicklasw.messageboard.domain.user.service.UserService;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
+import lombok.NonNull;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.InsufficientAuthenticationException;
@@ -32,10 +33,10 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
     @SuppressFBWarnings(value = "EI_EXPOSE_REP", justification = "Spring Boot class, should be mutable")
     private final WebSecurityConfiguration webSecurityConfiguration;
 
-    public JwtAuthorizationFilter(final AuthenticationManager authenticationManager,
-                                  final AuthenticationEntryPoint authenticationEntryPoint,
-                                  final UserService userService,
-                                  final WebSecurityConfiguration webSecurityConfiguration) {
+    public JwtAuthorizationFilter(@NonNull final AuthenticationManager authenticationManager,
+                                  @NonNull final AuthenticationEntryPoint authenticationEntryPoint,
+                                  @NonNull final UserService userService,
+                                  @NonNull final WebSecurityConfiguration webSecurityConfiguration) {
         super(authenticationManager, authenticationEntryPoint);
 
         this.userService = userService;

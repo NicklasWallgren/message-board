@@ -1,39 +1,14 @@
 
 
-
-
-
-
-
 event, push via websocket?
-
-Korrekt error hantering
-    NotFoundClientException
-    MissingEntityException vs NotFoundClientException
-    UsernameNotFoundException
-    InsufficientAuthenticationException
-    BadCredentialsException
-    AuthenticationException
-
 
 NotFoundException, @NotNull
 
 Retryable
-Transaction
 
 Snygga till gradle
     database.gradle
         Cache via ehcache?
-
-Varför använder vi SecureOperation?
-
-Validation
-    message source?    
-
-Database
-    Unique index
-    Index
-    Flyway, data-schema?
 
 Java 17?
 

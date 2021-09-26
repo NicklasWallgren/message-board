@@ -17,13 +17,6 @@ public abstract class ServerError extends RuntimeException {
         this.validateSelf();
     }
 
-    protected ServerError(final HttpStatus status, final String message, final Throwable throwable) {
-        super(message(status, message), throwable);
-        this.id = UUID.randomUUID();
-        this.status = status;
-        this.validateSelf();
-    }
-
     private static String message(final HttpStatus status, final String message) {
         return status.getReasonPhrase() + ": " + message;
     }

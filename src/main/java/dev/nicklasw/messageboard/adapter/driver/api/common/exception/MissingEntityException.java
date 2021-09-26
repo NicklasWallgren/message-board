@@ -1,6 +1,7 @@
 package dev.nicklasw.messageboard.adapter.driver.api.common.exception;
 
 import dev.nicklasw.messageboard.domain.MessageBoardEntity;
+import lombok.NonNull;
 import org.springframework.http.HttpStatus;
 
 public final class MissingEntityException extends ClientException {
@@ -19,7 +20,7 @@ public final class MissingEntityException extends ClientException {
      *
      * @param message (required)
      */
-    public MissingEntityException(final String message) {
+    public MissingEntityException(@NonNull final String message) {
         super(HttpStatus.UNPROCESSABLE_ENTITY, message);
     }
 

@@ -16,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Size;
 
 import dev.nicklasw.messageboard.domain.MessageBoardEntity;
@@ -35,7 +36,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Entity
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "users")
+@Table(name = "users", uniqueConstraints = @UniqueConstraint(name = "u_username", columnNames = "username"))
 public class User extends MessageBoardEntity implements UserDetails {
 
     @Id
@@ -44,7 +45,7 @@ public class User extends MessageBoardEntity implements UserDetails {
     private Long id;
 
     @Size(min = 1, max = 255)
-    @Column(unique = true, nullable = false)
+    @Column(name = "username", unique = true, nullable = false)
     private String username;
 
     @Size(min = 1, max = 255)

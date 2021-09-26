@@ -10,7 +10,6 @@ import dev.nicklasw.messageboard.domain.user.entities.User;
 import dev.nicklasw.messageboard.domain.user.service.UserService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -22,7 +21,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class AuthenticationServiceImpl implements AuthenticationService {
 
-    @Lazy
     private final AuthenticationManager authenticationManager;
     private final UserService userService;
 
