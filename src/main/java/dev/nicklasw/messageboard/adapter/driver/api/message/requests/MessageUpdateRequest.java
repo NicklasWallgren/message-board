@@ -4,7 +4,7 @@ import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import dev.nicklasw.messageboard.adapter.driver.api.response.ApiRequest;
+import dev.nicklasw.messageboard.adapter.driver.api.common.response.ApiRequest;
 import lombok.Getter;
 
 @Getter

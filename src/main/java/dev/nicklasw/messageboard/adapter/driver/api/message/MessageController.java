@@ -3,15 +3,15 @@ package dev.nicklasw.messageboard.adapter.driver.api.message;
 import javax.validation.Valid;
 
 import com.querydsl.core.types.Predicate;
-import dev.nicklasw.messageboard.adapter.driver.api.annotation.ApiController;
-import dev.nicklasw.messageboard.adapter.driver.api.annotation.ApiDelete;
-import dev.nicklasw.messageboard.adapter.driver.api.annotation.ApiGet;
-import dev.nicklasw.messageboard.adapter.driver.api.annotation.ApiPatch;
-import dev.nicklasw.messageboard.adapter.driver.api.annotation.ApiPost;
-import dev.nicklasw.messageboard.adapter.driver.api.annotation.SecureOperation;
-import dev.nicklasw.messageboard.adapter.driver.api.annotation.SecurePageableOperation;
-import dev.nicklasw.messageboard.adapter.driver.api.converter.MessageApiConverter;
-import dev.nicklasw.messageboard.adapter.driver.api.exception.NotFoundClientException;
+import dev.nicklasw.messageboard.adapter.driver.api.common.annotation.ApiController;
+import dev.nicklasw.messageboard.adapter.driver.api.common.annotation.ApiDelete;
+import dev.nicklasw.messageboard.adapter.driver.api.common.annotation.ApiGet;
+import dev.nicklasw.messageboard.adapter.driver.api.common.annotation.ApiPatch;
+import dev.nicklasw.messageboard.adapter.driver.api.common.annotation.ApiPost;
+import dev.nicklasw.messageboard.adapter.driver.api.common.annotation.SecureOperation;
+import dev.nicklasw.messageboard.adapter.driver.api.common.annotation.SecurePageableOperation;
+import dev.nicklasw.messageboard.adapter.driver.api.common.exception.NotFoundException;
+import dev.nicklasw.messageboard.adapter.driver.api.message.converters.MessageApiConverter;
 import dev.nicklasw.messageboard.adapter.driver.api.message.requests.MessageCreateRequest;
 import dev.nicklasw.messageboard.adapter.driver.api.message.requests.MessageUpdateRequest;
 import dev.nicklasw.messageboard.adapter.driver.api.message.responses.MessageResponse;
@@ -49,7 +49,7 @@ public class MessageController {
     public MessageResponse findById(@PathVariable("id") final Long id) {
         return messageService.findById(id)
             .map(apiConverter::responseOf)
-            .orElseThrow(() -> NotFoundClientException.of("message", "id", id));
+            .orElseThrow(() -> NotFoundException.of("message", "id", id));
     }
 
     @ApiPost(code = HttpStatus.CREATED)

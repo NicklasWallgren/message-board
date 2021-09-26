@@ -1,6 +1,10 @@
 dependencies {
     spotbugsPlugins 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.11.0'
-//    spotbugs 'com.github.spotbugs:spotbugs:4.4.1'
+
+    compileOnly 'com.github.spotbugs:spotbugs-annotations:4.4.1'
+    testCompileOnly 'com.github.spotbugs:spotbugs-annotations:4.4.1'
+
+    errorprone 'com.google.errorprone:error_prone_core:2.9.+'
 }
 
 /****************************

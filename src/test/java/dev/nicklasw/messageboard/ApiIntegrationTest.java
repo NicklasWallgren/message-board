@@ -66,16 +66,12 @@ public class ApiIntegrationTest extends IntegrationTest {
 
     protected void whenDeleteThenIsNoContent(final String url) throws Exception {
         mvc.perform(delete(url))
-            .andExpect(status().is(HttpStatus.NO_CONTENT.value()))
-            .andReturn()
-            .getResponse().getContentAsString();
+            .andExpect(status().is(HttpStatus.NO_CONTENT.value()));
     }
 
     protected void whenDelete(final String url, final HttpStatus expectedStatus) throws Exception {
         mvc.perform(delete(url))
-            .andExpect(status().is(expectedStatus.value()))
-            .andReturn()
-            .getResponse().getContentAsString();
+            .andExpect(status().is(expectedStatus.value()));
     }
 
 

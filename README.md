@@ -1,19 +1,22 @@
 
 
-autentisering
-    JWT
-    Spring boot security
 
-flyway migrations?
-hexagonal architecture
+
+
+
 
 event, push via websocket?
-
-
 
 Korrekt error hantering
     NotFoundClientException
     MissingEntityException vs NotFoundClientException
+    UsernameNotFoundException
+    InsufficientAuthenticationException
+    BadCredentialsException
+    AuthenticationException
+
+
+NotFoundException, @NotNull
 
 Retryable
 Transaction
@@ -35,6 +38,7 @@ Database
 Java 17?
 
 Metrics?
+    health metrics
 
 Kontrollera equals och hashCode
 
