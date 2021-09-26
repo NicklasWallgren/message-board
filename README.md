@@ -17,14 +17,10 @@ Metrics?
 
 Kontrollera equals och hashCode
 
-ehcache
-
 Github actions
     generate java doc
 
 Make file?
-
-querydsl?
 
 swagger
     description på fält
@@ -32,8 +28,6 @@ swagger
 
 tester
     Validera request klasser?
-
-jacoco
 
 monitorering
 

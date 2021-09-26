@@ -1,11 +1,14 @@
 package dev.nicklasw.messageboard.domain.user.entities;
 
 
+import static org.hibernate.annotations.CacheConcurrencyStrategy.READ_WRITE;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.Cacheable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,6 +30,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.security.core.GrantedAuthority;
@@ -34,6 +38,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 @Getter
 @Entity
+@Cache(usage = READ_WRITE)
+@Cacheable
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "users", uniqueConstraints = @UniqueConstraint(name = "u_username", columnNames = "username"))
@@ -73,7 +79,7 @@ public class User extends MessageBoardEntity implements UserDetails {
     /**
      * Creates new {@link User}.
      *
-     * @param id of the user.
+     * @param id       of the user.
      * @param username must not be {@literal null}.
      * @param password must not be {@literal null}.
      * @return a {@link User}.

@@ -1,6 +1,9 @@
 package dev.nicklasw.messageboard.domain.message.entities;
 
+import static org.hibernate.annotations.CacheConcurrencyStrategy.READ_WRITE;
+
 import java.util.Objects;
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -20,9 +23,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.Setter;
+import org.hibernate.annotations.Cache;
 
 @Getter
 @Entity
+@Cache(usage = READ_WRITE)
+@Cacheable
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "messages")

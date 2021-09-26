@@ -71,7 +71,6 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    //    @Retryable(StaleStateException.class) // TODO
     @Transactional
     public Message delete(@NonNull final Message message) {
         final User user = authenticationService.optionalAuthenticatedUser()
