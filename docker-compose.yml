@@ -1,0 +1,11 @@
+version: '2.3'
+services:
+  app:
+    extends:
+      file: app/docker-compose.yml
+      service: app
+
+  webapp:
+    extends:
+      file: webapp/docker-compose.yml
+      service: webapp

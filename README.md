@@ -1,26 +1,17 @@
 
 
-event, push via websocket?
-
-NotFoundException, @NotNull
-
-Retryable
-
-Snygga till gradle
-    database.gradle
-        Cache via ehcache?
-
-Java 17?
+docker
+kubernetes
 
 Metrics?
     health metrics
+    monitorering
 
-Kontrollera equals och hashCode
+Java 17?
 
-Github actions
-    generate java doc
+event, push via websocket?
 
-Make file?
+NotFoundException, @NotNull
 
 swagger
     description på fält
@@ -29,18 +20,14 @@ swagger
 tester
     Validera request klasser?
 
-monitorering
-
-docker
-kubernetes
-
-native
-reactor/async
-
-hibernate
-    enhance entities
 
 react frontend?
 generate api from swagger
 webassembly frontend?
 websocket?
+
+native
+reactor/async
+
+hibernate
+enhance entities
