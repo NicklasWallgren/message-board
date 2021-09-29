@@ -27,8 +27,8 @@ function App() {
             <UserSessionContext.Provider value={{user, setUser}}>
                 <Switch>
                     <Route exact path="/" component={Landing}/>
-                    <Route path="/register" render={() => <Register style={style}/>}/>
-                    <Route path="/login" render={() => <Login style={style}/>}/>
+                    {/*<Route path="/register" render={() => <Register style={style}/>}/>*/}
+                    {/*<Route path="/login" render={() => <Login style={style}/>}/>*/}
                     <ProtectedRoute path="/home" component={Home}/>
                     <Route component={NotFound}/>
                 </Switch>

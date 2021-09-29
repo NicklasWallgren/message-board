@@ -57,7 +57,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        // Only for POC purpose. Use e.g. BCryptPasswordEncoder instead
+        // Only for DEMO purpose. Use e.g. BCryptPasswordEncoder instead
         return NoOpPasswordEncoder.getInstance();
     }
 

@@ -1,26 +1,26 @@
-import React, {useContext} from 'react';
-import {Link} from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import InlineButton from './../components/InlineButton';
-import {UserSessionContext} from '../contexts/UserSessionContext';
+import { UserSessionContext } from '../contexts/UserSessionContext';
 import useLogout from './../hooks/useLogout';
 
 export default function Header() {
-    const {user} = useContext(UserSessionContext);
-    const {logoutUser} = useLogout();
+    const { user } = useContext(UserSessionContext);
+    const { logoutUser } = useLogout();
 
     return (
         <header>
-            {user
+            { user
                 ? <>
-                    Hello, {user.username}.
-                    <InlineButton name={'logout'} handleClick={logoutUser}/>
+                    Hello, { user.username }.
+                    <InlineButton name={ 'logout' } handleClick={ logoutUser }/>
                 </>
-                : <div className='btnGroup'>
+                : <div>
                     <Link to="/login">
-                        <InlineButton name={"login"}/>
+                        <InlineButton name={ "login" }/>
                     </Link>
                     <Link to="/register">
-                        <InlineButton name={"register"}/>
+                        <InlineButton name={ "register" }/>
                     </Link>
                 </div>
             }

@@ -16,6 +16,8 @@ let token: string | undefined;
 let onError: OnError | undefined;
 let onUnauthorized: OnUnauthorized | undefined;
 
+export const setToken = (newToken: string) => (token = newToken);
+
 apiClient.defaults.baseURL = "http://localhost:8080/api"; // TODO
 apiClient.defaults.headers.common["Content-Type"] = "application/json";
 apiClient.defaults.headers.common["Access-Control-Allow-Origin"] = "*";

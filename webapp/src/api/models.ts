@@ -38,7 +38,7 @@ export interface PageMessageResponse<T extends EntityResponse> {
     totalPages: number;
     totalElements: number;
     size: number;
-    content: Array<EntityResponse>;
+    content: Array<T>;
     number: number;
     sort: Sort;
     numberOfElements: number;

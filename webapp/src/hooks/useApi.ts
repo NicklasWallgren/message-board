@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { UserSessionContext } from '../contexts/UserSessionContext';
-import { login, register } from "../api/api";
+import { login, register, setToken } from "../api/api";
 import { ErrorResponse } from "../api/models";
 
 export default function useApi() {
@@ -25,6 +25,7 @@ export default function useApi() {
 
         return login({ username, password })
             .then(async (response) => {
+                setToken(response.token)
                 setUser({ id: response.id, username: response.username, token: response.token })
                 history.push('/home');
             }).catch((err: ErrorResponse) => {

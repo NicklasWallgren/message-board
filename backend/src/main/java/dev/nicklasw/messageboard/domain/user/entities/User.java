@@ -47,7 +47,7 @@ public class User extends MessageBoardEntity implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_sequenceGenerator")
-    @SequenceGenerator(name = "report_row_sequenceGenerator", allocationSize = 10, sequenceName = "s_user")
+    @SequenceGenerator(name = "report_row_sequenceGenerator", initialValue = 50, allocationSize = 50, sequenceName = "s_user")
     private Long id;
 
     @Size(min = 1, max = 255)
