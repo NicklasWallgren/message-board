@@ -6,17 +6,16 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Error from "../components/Error";
 
-export function RegisterForm({ style }: any) {
-    const [ values, handleChange ] = useForm<RegisterFormState>(({ username: '', password: '' }));
+export function RegisterForm({ style, loginHandle }: any) {
+    const [ values, handleValueChange ] = useForm<RegisterFormState>(({ username: '', password: '' }));
     const { registerUser, errorMessage } = useApi();
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
 
-        await registerUser(values);
-
-        // TODO, then navigate to new page
-
+        registerUser(values).then(() => {
+            loginHandle();
+        });
     }
 
     return (
@@ -27,7 +26,7 @@ export function RegisterForm({ style }: any) {
                 variant="filled"
                 required
                 value={ values.username }
-                onChange={ handleChange }
+                onChange={ handleValueChange }
             />
             <TextField
                 label="Password"
@@ -36,10 +35,10 @@ export function RegisterForm({ style }: any) {
                 type="password"
                 required
                 value={ values.password }
-                onChange={ handleChange }
+                onChange={ handleValueChange }
             />
             <div>
-                <Button variant="contained" onClick={ handleSubmit }>
+                <Button variant="contained" onClick={ loginHandle }>
                     Cancel
                 </Button>
                 <Button type="submit" variant="contained" color="primary">

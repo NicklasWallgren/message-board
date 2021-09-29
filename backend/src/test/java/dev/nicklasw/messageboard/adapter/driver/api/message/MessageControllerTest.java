@@ -71,7 +71,7 @@ class MessageControllerTest extends ApiIntegrationTest {
     void givenNewMessage_whenSave_thenIsCreated() throws Exception {
         givenStatefulAuthenticatedUser();
 
-        final MessageCreateRequest request = new MessageCreateRequest("A very descriptive text");
+        final MessageCreateRequest request = new MessageCreateRequest("Subject", "A very descriptive text");
 
         whenPostThenIsCreated("/api/messages", request)
             .andExpect(jsonPath("$.id", Matchers.isA(Long.class), Long.class))
@@ -81,7 +81,7 @@ class MessageControllerTest extends ApiIntegrationTest {
     @Test
     @WithStatelessUser
     void givenBlankText_whenSave_thenIsBadRequest() throws Exception {
-        final MessageCreateRequest request = new MessageCreateRequest("");
+        final MessageCreateRequest request = new MessageCreateRequest("Subject", "");
 
         whenPost("/api/messages", request, HttpStatus.BAD_REQUEST);
     }
@@ -89,7 +89,7 @@ class MessageControllerTest extends ApiIntegrationTest {
     @Test
     @WithStatelessUser
     void givenNullText_whenSave_thenIsBadRequest() throws Exception {
-        final MessageCreateRequest request = new MessageCreateRequest(null);
+        final MessageCreateRequest request = new MessageCreateRequest("Subject", null);
 
         whenPost("/api/messages", request, HttpStatus.BAD_REQUEST);
     }
@@ -99,7 +99,7 @@ class MessageControllerTest extends ApiIntegrationTest {
         final User user = givenStatefulAuthenticatedUser();
         final Message message = messageFactory.given(MessageFaker.message().with(user));
 
-        final MessageUpdateRequest request = new MessageUpdateRequest("A very descriptive text");
+        final MessageUpdateRequest request = new MessageUpdateRequest("Subject", "A very descriptive text");
 
         whenPatchThenIsOK("/api/messages/" + message.getId(), request)
             .andExpect(jsonPath("$.id", Matchers.isA(Long.class), Long.class))
@@ -112,7 +112,7 @@ class MessageControllerTest extends ApiIntegrationTest {
         final Message message = messageFactory.given(MessageFaker.message()
             .with(givenStatefulUser()));
 
-        final MessageUpdateRequest request = new MessageUpdateRequest("A very descriptive text");
+        final MessageUpdateRequest request = new MessageUpdateRequest("Subject", "A very descriptive text");
 
         whenPatch("/api/messages/" + message.getId(), request, HttpStatus.BAD_REQUEST);
     }
@@ -122,7 +122,7 @@ class MessageControllerTest extends ApiIntegrationTest {
     void givenBlankText_whenUpdate_thenIsBadRequest() throws Exception {
         final Message message = messageFactory.givenAny();
 
-        final MessageUpdateRequest request = new MessageUpdateRequest("");
+        final MessageUpdateRequest request = new MessageUpdateRequest("Subject", "");
 
         whenPatch("/api/messages/" + message.getId(), request, HttpStatus.BAD_REQUEST);
     }
@@ -132,7 +132,7 @@ class MessageControllerTest extends ApiIntegrationTest {
     void givenNullText_whenUpdate_thenIsBadRequest() throws Exception {
         final Message message = messageFactory.givenAny();
 
-        final MessageUpdateRequest request = new MessageUpdateRequest(null);
+        final MessageUpdateRequest request = new MessageUpdateRequest("Subject", null);
 
         whenPatch("/api/messages/" + message.getId(), request, HttpStatus.BAD_REQUEST);
     }

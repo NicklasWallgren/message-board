@@ -36,7 +36,7 @@ export function RegisterModal({ open, handleOpen, handleClose }: any) {
                     <Typography id="modal-modal-title" variant="h6" component="h2">
                         Register
                     </Typography>
-                    <RegisterForm style={theme}/>
+                    <RegisterForm style={theme} loginHandle={ handleClose }/>
                 </Box>
             </Modal>
         </div>

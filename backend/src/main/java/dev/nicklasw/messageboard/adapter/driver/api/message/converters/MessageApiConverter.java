@@ -32,14 +32,14 @@ public class MessageApiConverter implements
     public MessageResponse responseOf(@NonNull final Message message) {
         final User user = message.getUser();
 
-        return MessageResponse.of(message.getId(), message.getText(), MessageResponse.User.of(user.getId(), user.getUsername()));
+        return MessageResponse.of(message.getId(), message.getSubject(), message.getText(), MessageResponse.User.of(user.getId(), user.getUsername()));
     }
 
     @Override
     public Message toDomain(@NonNull final MessageCreateRequest request) {
         final User user = authenticationService.optionalAuthenticatedUser().orElseThrow();
 
-        return Message.of(request.getText(), user);
+        return Message.of(request.getSubject(), request.getText(), user);
     }
 
     @Override
@@ -47,6 +47,7 @@ public class MessageApiConverter implements
         final Message existing = messageService.findOneForUpdate(id)
             .orElseThrow(() -> NotFoundException.of("message", "id", id));
 
-        return existing.setText(request.getText());
+        return existing.setSubject(request.getSubject())
+            .setText(request.getText());
     }
 }

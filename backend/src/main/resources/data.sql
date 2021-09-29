@@ -6,8 +6,8 @@ insert into users (id, username, password, created_by, created_timestamp) values
 insert into users (id, username, password, created_by, created_timestamp) values(2, 'alex', '12345', 'system', NOW());
 insert into users (id, username, password, created_by, created_timestamp) values(3, 'jennifer', '12345', 'system', NOW());
 
-insert into messages (user_id, text, created_by, created_timestamp) values(1, 'a text', 'scott', NOW());
-insert into messages (user_id, text, created_by, created_timestamp) values(2, 'a text', 'alex', NOW());
-insert into messages (user_id, text, created_by, created_timestamp) values(3, 'a text', 'jennifer', NOW());
+insert into messages (user_id, subject, text, created_by, created_timestamp) values(1, 'Brunch this weekend?', 'I''ll be in your neighborhood doing errands this…', 'scott', NOW());
+insert into messages (user_id, subject, text, created_by, created_timestamp) values(2, 'Summer BBQ', 'Wish I could come, but I''m out of town this…', 'alex', NOW());
+insert into messages (user_id, subject, text, created_by, created_timestamp) values(3, 'Oui Oui', 'Do you have Paris recommendations?', 'jennifer', NOW());
 
 

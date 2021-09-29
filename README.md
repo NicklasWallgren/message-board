@@ -2,8 +2,17 @@
 
 generate api from swagger
 frontend
-    login
-    
+    Flytta forms till separat mapp
+    Ta bort useAuth?
+    Style?
+    Använd default export
+    ThemeContext provider?
+    Ta bort meddelanden
+    Uppdatera meddelanden
+    Om servern inte är tillgänglig?
+    Defienera fler typer
+     
+    Flera tester?
 
 kubernetes
 

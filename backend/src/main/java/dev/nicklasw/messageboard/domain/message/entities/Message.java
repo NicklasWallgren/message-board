@@ -39,6 +39,11 @@ public class Message extends MessageBoardEntity {
     private Long id;
 
     @Setter
+    @Size(min = 1, max = 50)
+    @Column(nullable = false)
+    private String subject;
+
+    @Setter
     @Size(min = 1, max = 255)
     @Column(nullable = false)
     private String text;
@@ -76,14 +81,16 @@ public class Message extends MessageBoardEntity {
     /**
      * Creates new {@link Message}.
      *
+     * @param subject must not be {@literal null}.
      * @param text must not be {@literal null}.
      * @param user must not be {@literal null}.
      * @return a {@link Message}.
+     * @throws IllegalArgumentException if {@literal subject} is {@literal null} .
      * @throws IllegalArgumentException if {@literal text} is {@literal null} .
      * @throws IllegalArgumentException if {@literal user} is {@literal null} .
      */
-    public static Message of(@NonNull final String text, @NonNull final User user) {
-        return new Message(null, text, user);
+    public static Message of(@NonNull final String subject, @NonNull final String text, @NonNull final User user) {
+        return new Message(null, subject, text, user);
     }
 
 }

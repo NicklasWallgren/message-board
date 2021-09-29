@@ -11,12 +11,16 @@ import lombok.Getter;
 public class MessageCreateRequest implements ApiRequest {
 
     @NotBlank
+    private final String subject;
+    @NotBlank
     private final String text;
 
     @JsonCreator
     public MessageCreateRequest(
+        @JsonProperty(value = "subject", required = true) final String subject,
         @JsonProperty(value = "text", required = true) final String text
     ) {
+        this.subject = subject;
         this.text = text;
     }
 

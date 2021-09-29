@@ -6,14 +6,16 @@ import { RegisterFormState } from "../models/RegisterFormState";
 import useApi from "../hooks/useApi";
 import Error from "../components/Error";
 
-export function LoginForm({ style }: any) {
+export function LoginForm({ style, loginHandle }: any) {
     const [ values, handleChange ] = useForm<RegisterFormState>(({ username: '', password: '' }));
     const { loginUser, errorMessage } = useApi();
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
 
-        await loginUser(values);
+        loginUser(values).then(() => {
+            loginHandle()
+        })
     }
 
     return (
@@ -36,7 +38,7 @@ export function LoginForm({ style }: any) {
                 onChange={ handleChange }
             />
             <div>
-                <Button variant="contained" onClick={ handleSubmit }>
+                <Button variant="contained" onClick={ loginHandle }>
                     Cancel
                 </Button>
                 <Button type="submit" variant="contained" color="primary">

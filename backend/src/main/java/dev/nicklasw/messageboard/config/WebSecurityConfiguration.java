@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -42,6 +43,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
             .addFilter(new JwtAuthorizationFilter(authenticationManager(), authenticationExceptionEntryPoint, userService, this))
             .authorizeRequests()
             .antMatchers("/api/auth/**").permitAll()
+            .antMatchers(HttpMethod.GET, "/api/messages").permitAll()
             .antMatchers("/health/**").permitAll()
             .antMatchers("/ws/**").permitAll()
             .antMatchers("/swagger-ui/**").permitAll()

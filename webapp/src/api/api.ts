@@ -3,8 +3,7 @@ import {
     ErrorResponse,
     LoginResponse,
     Message,
-    OnError,
-    OnUnauthorized,
+    MessageResponse,
     PageMessageResponse,
     RegisterResponse,
     UserCredentials
@@ -13,12 +12,10 @@ import {
 const apiClient = axios.create();
 
 let token: string | undefined;
-let onError: OnError | undefined;
-let onUnauthorized: OnUnauthorized | undefined;
 
 export const setToken = (newToken: string) => (token = newToken);
 
-apiClient.defaults.baseURL = "http://localhost:8080/api"; // TODO
+apiClient.defaults.baseURL = "http://localhost:8080/api";
 apiClient.defaults.headers.common["Content-Type"] = "application/json";
 apiClient.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
 apiClient.interceptors.request.use((config) => {
@@ -48,7 +45,16 @@ export const login = async ({ username, password }: UserCredentials): Promise<Lo
 }
 
 export const getMessages = async (): Promise<PageMessageResponse<Message>> => {
-    return apiClient.get<PageMessageResponse<Message>>(`/messages`)
+    return apiClient.get<PageMessageResponse<Message>>(`/messages?sort=id,desc`)
+        .then(response => {
+            return response.data
+        }).catch(error => {
+            return Promise.reject(error.response.data as ErrorResponse);
+        });
+}
+
+export const createMessage = async (subject: string, text: string): Promise<MessageResponse> => {
+    return apiClient.post<MessageResponse>(`/messages`, { subject, text })
         .then(response => {
             return response.data
         }).catch(error => {

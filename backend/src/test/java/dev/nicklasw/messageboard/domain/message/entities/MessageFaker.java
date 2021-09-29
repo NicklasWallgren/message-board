@@ -7,17 +7,19 @@ import org.apache.commons.lang3.RandomUtils;
 
 public class MessageFaker implements EntityFaker<Message> {
 
+    private String subject;
     private String text;
     private User user;
 
     public MessageFaker() {
+        this.subject = "Subject" + RandomUtils.nextInt(1, Integer.MAX_VALUE);
         this.text = "Text" + RandomUtils.nextInt(1, Integer.MAX_VALUE);
         this.user = UserFaker.random();
     }
 
     @Override
     public Message create() {
-        return new Message(null, text, user);
+        return new Message(null, subject, text, user);
     }
 
     public MessageFaker with(final User user) {

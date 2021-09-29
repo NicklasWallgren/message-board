@@ -1,8 +1,5 @@
 import { Pageable, Sort } from "../../test";
 
-export type OnError = (errorMessage: string) => void
-export type OnUnauthorized = () => void
-
 export interface UserCredentials {
     username: string;
     password: string;
@@ -28,10 +25,16 @@ export interface EntityResponse {
     id: number
 }
 
+export interface User {
+    id: number,
+    username: string
+}
+
 export interface Message {
     id: number,
+    subject: string,
     text: string,
-    user: any
+    user: User
 }
 
 export interface PageMessageResponse<T extends EntityResponse> {
@@ -46,4 +49,10 @@ export interface PageMessageResponse<T extends EntityResponse> {
     last: boolean;
     pageable: Pageable;
     empty: boolean;
+}
+
+export interface MessageResponse {
+    id: number,
+    text: string,
+    user: any
 }

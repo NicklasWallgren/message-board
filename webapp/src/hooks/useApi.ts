@@ -1,37 +1,70 @@
 import { useContext, useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import { UserSessionContext } from '../contexts/UserSessionContext';
-import { login, register, setToken } from "../api/api";
-import { ErrorResponse } from "../api/models";
+import { createMessage, getMessages, login, register, setToken } from "../api/api";
+import {
+    ErrorResponse,
+    LoginResponse,
+    Message,
+    MessageResponse,
+    PageMessageResponse,
+    RegisterResponse
+} from "../api/models";
 
 export default function useApi() {
-    const history = useHistory();
     const [ errorMessage, setErrorMessage ] = useState("");
     const { setUser } = useContext(UserSessionContext);
 
-    const registerUser = async (data: any) => {
+    const registerUser = async (data: any): Promise<RegisterResponse> => {
         const { username, password } = data;
 
         return register({ username, password })
             .then(async (response) => {
-                history.push('/home');
+                return Promise.resolve(response);
             }).catch((err: ErrorResponse) => {
                 setErrorMessage(err.message);
+
+                return Promise.reject(err);
             })
     };
 
-    const loginUser = async (data: any) => {
+    const loginUser = async (data: any): Promise<LoginResponse> => {
         const { username, password } = data;
 
         return login({ username, password })
             .then(async (response) => {
                 setToken(response.token)
                 setUser({ id: response.id, username: response.username, token: response.token })
-                history.push('/home');
+
+                return Promise.resolve<LoginResponse>(response);
             }).catch((err: ErrorResponse) => {
                 setErrorMessage(err.message);
+
+                return Promise.reject(err);
             })
     };
 
-    return { registerUser, loginUser, errorMessage }
+    const getLatestMessages = async (): Promise<PageMessageResponse<Message>> => {
+        return getMessages()
+            .then(async (response) => {
+                return Promise.resolve<PageMessageResponse<Message>>(response);
+            }).catch((err: ErrorResponse) => {
+                setErrorMessage(err.message);
+
+                return Promise.reject(err);
+            })
+    };
+
+    const addNewMessage = async (subject: string, text: string): Promise<MessageResponse> => {
+        return createMessage(subject, text)
+            .then(async (response) => {
+                return Promise.resolve<MessageResponse>(response);
+            }).catch((err: ErrorResponse) => {
+                setErrorMessage(err.message);
+
+                return Promise.reject(err);
+            })
+    };
+
+
+    return { registerUser, loginUser, addNewMessage, getLatestMessages, errorMessage }
 }

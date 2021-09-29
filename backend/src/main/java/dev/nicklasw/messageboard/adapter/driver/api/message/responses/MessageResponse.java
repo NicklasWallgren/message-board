@@ -6,6 +6,7 @@ import lombok.Value;
 @Value(staticConstructor = "of")
 public class MessageResponse implements ApiResponse {
     Long id;
+    String subject;
     String text;
     User user;
 
