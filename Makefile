@@ -1,5 +1,5 @@
 # Available docker containers
-CONTAINERS=app webapp
+CONTAINERS=backend webapp
 
 #####################################################
 #							 						#
@@ -59,38 +59,18 @@ status: prerequisite
 #####################################################
 #							 						#
 # 							 						#
-# BASH CLI TARGETS			 						#
-#							 						#
-#							 						#
-####################################################
-
-# Opens a bash prompt to the php cli container
-bash-app: prerequisite
-	- docker-compose -f docker-compose.yml exec app bash
-
-# Opens a bash prompt to the php fpm container
-bash-webapp: prerequisite
-	- docker-compose -f docker-compose.yml exec webapp sh
-
-# Start the development server
-webapp-dev:
-	- docker-compose -f docker-compose.yml exec webapp sh -c "PORT=5001 yarn start"
-
-#####################################################
-#							 						#
-# 							 						#
 # TEST TARGETS			 						    #
 #							 						#
 #							 						#
 ####################################################
 
 # Launch the application CI tests
-test-ci: test-app test-webapp
+test-ci: test-backend test-webapp
 
 # Launch the JUnit tests
-test-app:
-	- @echo "Start the App cli tests";
-	- docker-compose -f docker-compose.yml exec app bash -c "cd /app && ./gradlew test"
+test-backend:
+	- @echo "Start the Backend cli tests";
+	- docker-compose -f docker-compose.yml exec backend bash -c "cd /backend && ./gradlew test"
 
 # Launch the JS CI tests
 test-webapp:

@@ -1,9 +1,9 @@
 version: '2.3'
 services:
-  app:
+  backend:
     extends:
-      file: app/docker-compose.yml
-      service: app
+      file: backend/docker-compose.yml
+      service: backend
 
   webapp:
     extends:

@@ -11,6 +11,6 @@ services:
       - 5000:5000
       - 5001:5001
     volumes:
-      - ./:/webapp:cached
+      - ./:/webapp:delegated
     working_dir: /webapp
     command: sh -c 'yarn install && yarn run build && yarn global add serve && serve -s build -l 5000'

@@ -1,6 +1,10 @@
 
 
-docker
+generate api from swagger
+frontend
+    login
+    
+
 kubernetes
 
 Metrics?
@@ -20,9 +24,6 @@ swagger
 tester
     Validera request klasser?
 
-
-react frontend?
-generate api from swagger
 webassembly frontend?
 websocket?
 
