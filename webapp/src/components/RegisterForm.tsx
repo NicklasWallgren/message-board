@@ -13,8 +13,9 @@ export function RegisterForm({ style, onClose }: any) {
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
 
-        const response = await registerUser(values);
-        onClose();
+        registerUser(values).then((response) => {
+            onClose();
+        });
     }
 
     return (

@@ -7,7 +7,5 @@ services:
       dockerfile: ./docker/images/java
     ports:
       - 8080:8080
-    volumes:
-      - .:/backend:delegated
     working_dir: /backend
-    command: ./gradlew clean bootRun --args='--spring.profiles.active=docker'
+    command: ./gradlew bootRun --args='--spring.profiles.active=docker'

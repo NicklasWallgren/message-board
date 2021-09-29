@@ -9,7 +9,5 @@ services:
         - API_BASE_URL=${API_BASE_URL-http://localhost:8080/api}
     ports:
       - 3000:3000
-    volumes:
-      - ./:/webapp:delegated
     working_dir: /webapp
     command: sh -c 'yarn install && yarn start'

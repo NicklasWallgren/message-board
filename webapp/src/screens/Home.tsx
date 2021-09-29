@@ -40,10 +40,12 @@ export default function Home() {
         getMessages().then(response => {
             messagesSet(response.content)
         });
+        // eslint-disable-next-line
     }, [ date ])
 
     useEffect(() => {
         loadMessages()
+        // eslint-disable-next-line
     }, [ date ])
 
     return (
