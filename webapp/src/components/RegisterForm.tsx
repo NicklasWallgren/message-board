@@ -6,16 +6,15 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Error from "../components/Error";
 
-export function RegisterForm({ style, loginHandle }: any) {
+export function RegisterForm({ style, onClose }: any) {
     const [ values, handleValueChange ] = useForm<RegisterFormState>(({ username: '', password: '' }));
     const { registerUser, errorMessage } = useApi();
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
 
-        registerUser(values).then(() => {
-            loginHandle();
-        });
+        const response = await registerUser(values);
+        onClose();
     }
 
     return (
@@ -38,7 +37,7 @@ export function RegisterForm({ style, loginHandle }: any) {
                 onChange={ handleValueChange }
             />
             <div>
-                <Button variant="contained" onClick={ loginHandle }>
+                <Button variant="contained" onClick={ onClose }>
                     Cancel
                 </Button>
                 <Button type="submit" variant="contained" color="primary">

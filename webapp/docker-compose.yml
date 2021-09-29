@@ -4,13 +4,12 @@ services:
     image: messageboard-webapp
     build:
       context: .
-      dockerfile: docker/images/node-local
+      dockerfile: docker/images/node
       args:
         - API_BASE_URL=${API_BASE_URL-http://localhost:8080/api}
     ports:
-      - 5000:5000
-      - 5001:5001
+      - 3000:3000
     volumes:
       - ./:/webapp:delegated
     working_dir: /webapp
-    command: sh -c 'yarn install && yarn run build && yarn global add serve && serve -s build -l 5000'
+    command: sh -c 'yarn install && yarn start'

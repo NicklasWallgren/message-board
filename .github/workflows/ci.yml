@@ -16,7 +16,7 @@ jobs:
         uses: gradle/wrapper-validation-action@e6e38bacfdf1a337459f332974bb2327a31aaf4b
 
       - name: Check
-        run: ./gradlew check
+        run: cd backend/ && ./gradlew check
 
       - name: Build with Gradle
-        run: ./gradlew build
+        run: cd backend && ./gradlew build

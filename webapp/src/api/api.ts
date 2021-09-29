@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import {
     ErrorResponse,
     LoginResponse,
@@ -26,40 +26,40 @@ apiClient.interceptors.request.use((config) => {
     return Promise.resolve(config);
 });
 
+const errorHandler = (error: AxiosError) => {
+    if (!error?.response?.data) {
+        return Promise.reject(error)
+    }
+
+    return Promise.reject(error.response.data as ErrorResponse);
+}
+
 export const register = async ({ username, password }: UserCredentials): Promise<RegisterResponse> => {
     return apiClient.post<RegisterResponse>(`/auth/register`, { username, password })
         .then(response => {
             return response.data
-        }).catch(error => {
-            return Promise.reject(error.response.data as ErrorResponse);
-        });
+        }).catch(errorHandler);
 }
 
 export const login = async ({ username, password }: UserCredentials): Promise<LoginResponse> => {
     return apiClient.post<LoginResponse>(`/auth/login`, { username, password })
         .then(response => {
             return response.data
-        }).catch(error => {
-            return Promise.reject(error.response.data as ErrorResponse);
-        });
+        }).catch(errorHandler);
 }
 
 export const getMessages = async (): Promise<PageMessageResponse<Message>> => {
     return apiClient.get<PageMessageResponse<Message>>(`/messages?sort=id,desc`)
         .then(response => {
             return response.data
-        }).catch(error => {
-            return Promise.reject(error.response.data as ErrorResponse);
-        });
+        }).catch(errorHandler);
 }
 
 export const createMessage = async (subject: string, text: string): Promise<MessageResponse> => {
     return apiClient.post<MessageResponse>(`/messages`, { subject, text })
         .then(response => {
             return response.data
-        }).catch(error => {
-            return Promise.reject(error.response.data as ErrorResponse);
-        });
+        }).catch(errorHandler);
 }
 
 export { apiClient };

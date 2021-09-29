@@ -6,7 +6,7 @@ import { RegisterFormState } from "../models/RegisterFormState";
 import useApi from "../hooks/useApi";
 import Error from "../components/Error";
 
-export function LoginForm({ style, loginHandle }: any) {
+export function LoginForm({ style, onClose }: any) {
     const [ values, handleChange ] = useForm<RegisterFormState>(({ username: '', password: '' }));
     const { loginUser, errorMessage } = useApi();
 
@@ -14,7 +14,7 @@ export function LoginForm({ style, loginHandle }: any) {
         e.preventDefault();
 
         loginUser(values).then(() => {
-            loginHandle()
+            onClose()
         })
     }
 
@@ -38,7 +38,7 @@ export function LoginForm({ style, loginHandle }: any) {
                 onChange={ handleChange }
             />
             <div>
-                <Button variant="contained" onClick={ loginHandle }>
+                <Button variant="contained" onClick={ onClose }>
                     Cancel
                 </Button>
                 <Button type="submit" variant="contained" color="primary">

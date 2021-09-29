@@ -19,12 +19,12 @@ export function MessageListItem({ message }: { message: Message }) {
             <ListItem alignItems="flex-start"
                       secondaryAction={
                           <>
-                          <IconButton edge="end" aria-label="edit">
-                                <EditIcon/>
-                          </IconButton>
-                          <IconButton edge="end" aria-label="delete">
-                              <DeleteIcon/>
-                          </IconButton>
+                              <IconButton edge="end" aria-label="edit">
+                                  <EditIcon/>
+                              </IconButton>
+                              <IconButton edge="end" aria-label="delete">
+                                  <DeleteIcon/>
+                              </IconButton>
                           </>
                       }>
                 <ListItemAvatar>
